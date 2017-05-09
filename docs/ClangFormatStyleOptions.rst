@@ -1150,6 +1150,20 @@ the configuration (without a prefix: ``Auto``).
         : aaaaaaaaaaaaa(aaaaaaaaaaaaaa), aaaaaaaaaaaaa(aaaaaaaaaaaaaa),
           aaaaaaaaaaaaa(aaaaaaaaaaaaaa) {}
 
+**DanglingParenthesis** (``bool``)
+  If there is a break after the opening parenthesis, also break before the closing parenthesis
+
+  .. code-block:: c++
+
+    true:
+    someLongFunction(
+          argument1, argument2
+    );
+
+    false:
+    someLongFunction(
+          argument1, argument2);
+
 **ConstructorInitializerIndentWidth** (``unsigned``)
   The number of characters to use for indentation of constructor
   initializer lists as well as inheritance lists.
