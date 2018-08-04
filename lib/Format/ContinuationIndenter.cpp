@@ -953,6 +953,10 @@ unsigned ContinuationIndenter::getNewLineColumn(const LineState &State) {
   if (Style.DanglingParenthesis && Current.is(tok::r_paren) && State.Stack.size() > 1) {
     return State.Stack[State.Stack.size() - 2].LastSpace;
   }
+  if (Style.BreakBeforeTrailingReturnArrow &&
+      Current.isOneOf(TT_TrailingReturnArrow, TT_LambdaArrow) &&
+      State.Stack.size() > 1)
+    return ContinuationIndent;
   if (NextNonComment->is(TT_TemplateString) && NextNonComment->closesScope())
     return State.Stack[State.Stack.size() - 2].LastSpace;
   if (Current.is(tok::identifier) && Current.Next &&

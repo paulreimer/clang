@@ -980,6 +980,18 @@ struct FormatStyle {
   /// \endcode
   bool DanglingParenthesis;
 
+  /// \brief Break before C++ alternate return syntax trailing arrow
+  /// (e.g. as used for lambdas)
+  /// \code
+  ///    true:
+  ///    auto alternateReturnSyntaxFunction()
+  ///      -> bool;
+  ///
+  ///    false:
+  ///    auto alternateReturnSyntaxFunction() -> bool;
+  /// \endcode
+  bool BreakBeforeTrailingReturnArrow;
+
   /// The number of characters to use for indentation of constructor
   /// initializer lists as well as inheritance lists.
   unsigned ConstructorInitializerIndentWidth;

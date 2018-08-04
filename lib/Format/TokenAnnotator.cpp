@@ -2946,6 +2946,10 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
   if (Left.is(TT_ObjCBlockLBrace) && !Style.AllowShortBlocksOnASingleLine)
     return true;
 
+  if (Style.BreakBeforeTrailingReturnArrow &&
+      Right.isOneOf(TT_TrailingReturnArrow, TT_LambdaArrow))
+    return true;
+
   if ((Style.Language == FormatStyle::LK_Java ||
        Style.Language == FormatStyle::LK_JavaScript) &&
       Left.is(TT_LeadingJavaAnnotation) &&

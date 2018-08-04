@@ -1164,6 +1164,18 @@ the configuration (without a prefix: ``Auto``).
     someLongFunction(
           argument1, argument2);
 
+**BreakBeforeTrailingReturnArrow** (``bool``)
+  Break before C++ alternate return syntax trailing arrow (e.g. as used for lambdas)
+
+  .. code-block:: c++
+
+    true:
+    auto alternateReturnSyntaxFunction()
+      -> bool;
+
+    false:
+    auto alternateReturnSyntaxFunction() -> bool;
+
 **ConstructorInitializerIndentWidth** (``unsigned``)
   The number of characters to use for indentation of constructor
   initializer lists as well as inheritance lists.
