@@ -3224,6 +3224,9 @@ bool TokenAnnotator::canBreakBefore(const AnnotatedLine &Line,
   if (Right.is(TT_ImplicitStringLiteral))
     return false;
 
+  if (Right.is(tok::greater)) {
+    return Style.DanglingBracket;
+  }
   if (Right.is(tok::r_paren)) {
     return Style.DanglingParenthesis;
   }

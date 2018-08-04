@@ -1168,6 +1168,25 @@ the configuration (without a prefix: ``Auto``).
         : aaaaaaaaaaaaa(aaaaaaaaaaaaaa), aaaaaaaaaaaaa(aaaaaaaaaaaaaa),
           aaaaaaaaaaaaa(aaaaaaaaaaaaaa) {}
 
+**DanglingBracket** (``bool``)
+  If there is a break after the opening bracket, also break before the closing bracket
+
+  .. code-block:: c++
+
+    true:
+    template<
+      SomeFunctionWithLongTemplateArg1,
+      SomeFunctionWithLongTemplateArg2
+    >
+    someLongFunction();
+
+    false:
+    template<
+      SomeFunctionWithLongTemplateArg1,
+      SomeFunctionWithLongTemplateArg2>
+    someLongFunction();
+
+
 **DanglingParenthesis** (``bool``)
   If there is a break after the opening parenthesis, also break before the closing parenthesis
 

@@ -324,6 +324,12 @@ bool ContinuationIndenter::canBreak(const LineState &State) {
   if (Previous.is(tok::l_square) && Previous.is(TT_ObjCMethodExpr))
     return false;
 
+  if (Style.DanglingBracket) {
+    if (Current.is(tok::greater) &&
+        !State.Stack.back().BreakBeforeClosingBracket)
+      return false;
+  }
+
   if (Style.DanglingParenthesis) {
     if (Current.is(tok::r_paren) && !State.Stack.back().BreakBeforeClosingParen)
       return false;
@@ -885,6 +891,9 @@ unsigned ContinuationIndenter::addTokenOnNewLine(LineState &State,
        opensProtoMessageField(*PreviousNonComment, Style)))
     State.Stack.back().BreakBeforeClosingBrace = true;
 
+  if (PreviousNonComment && PreviousNonComment->is(tok::less))
+    State.Stack.back().BreakBeforeClosingBracket = Style.DanglingBracket;
+
   if (PreviousNonComment && PreviousNonComment->is(tok::l_paren))
     State.Stack.back().BreakBeforeClosingParen = Style.DanglingParenthesis;
 
@@ -952,6 +961,9 @@ unsigned ContinuationIndenter::getNewLineColumn(const LineState &State) {
   if (Current.is(tok::r_paren) && State.Stack.size() > 1 &&
       (!Current.Next || Current.Next->isOneOf(tok::semi, tok::l_brace)))
     return State.Stack[State.Stack.size() - 2].LastSpace;
+  if (Style.DanglingBracket && Current.is(tok::greater) && State.Stack.size() > 1) {
+    return State.Stack[State.Stack.size() - 2].LastSpace;
+  }
   if (Style.DanglingParenthesis && Current.is(tok::r_paren) && State.Stack.size() > 1) {
     return State.Stack[State.Stack.size() - 2].LastSpace;
   }
