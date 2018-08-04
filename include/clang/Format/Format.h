@@ -1726,6 +1726,7 @@ struct FormatStyle {
            BreakBeforeBinaryOperators == R.BreakBeforeBinaryOperators &&
            BreakBeforeBraces == R.BreakBeforeBraces &&
            BreakBeforeTernaryOperators == R.BreakBeforeTernaryOperators &&
+           BreakBeforeTrailingReturnArrow == R.BreakBeforeTrailingReturnArrow &&
            BreakConstructorInitializers == R.BreakConstructorInitializers &&
            CompactNamespaces == R.CompactNamespaces &&
            BreakAfterJavaFieldAnnotations == R.BreakAfterJavaFieldAnnotations &&
