@@ -3290,8 +3290,7 @@ bool TokenAnnotator::canBreakBefore(const AnnotatedLine &Line,
   return Left.isOneOf(tok::comma, tok::coloncolon, tok::semi, tok::l_brace,
                       tok::kw_class, tok::kw_struct, tok::comment) ||
          Right.isMemberAccess() ||
-         Right.isOneOf(TT_TrailingReturnArrow, TT_LambdaArrow, tok::lessless,
-                       tok::colon, tok::l_square, tok::at) ||
+         Right.isOneOf(tok::lessless, tok::colon, tok::l_square, tok::at) ||
          (Left.is(tok::r_paren) &&
           Right.isOneOf(tok::identifier, tok::kw_const)) ||
          (Left.is(tok::l_paren) && !Right.is(tok::r_paren)) ||
