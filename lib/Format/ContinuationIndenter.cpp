@@ -346,6 +346,8 @@ bool ContinuationIndenter::mustBreak(const LineState &State) {
   if (State.Stack.back().BreakBeforeClosingBrace &&
       Current.closesBlockOrBlockTypeList(Style))
     return true;
+  if(State.Stack.back().BreakBeforeClosingBracket && Current.is(tok::greater))
+    return true;
   if(State.Stack.back().BreakBeforeClosingParen && Current.is(tok::r_paren))
     return true;
   if (Previous.is(tok::semi) && State.LineContainsContinuedForLoopSection)
