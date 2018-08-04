@@ -203,14 +203,14 @@ struct ParenState {
   ParenState(const FormatToken *Tok, unsigned Indent, unsigned LastSpace,
              bool AvoidBinPacking, bool NoLineBreak)
       : Tok(Tok), Indent(Indent), LastSpace(LastSpace),
-        NestedBlockIndent(Indent), BreakBeforeClosingBrace(false),
-        BreakBeforeClosingParen(false), AvoidBinPacking(AvoidBinPacking),
-        BreakBeforeParameter(false), NoLineBreak(NoLineBreak),
-        NoLineBreakInOperand(false), LastOperatorWrapped(true),
-        ContainsLineBreak(false), ContainsUnwrappedBuilder(false),
-        AlignColons(true), ObjCSelectorNameFound(false),
-        HasMultipleNestedBlocks(false), NestedBlockInlined(false),
-        IsInsideObjCArrayLiteral(false) {}
+        NestedBlockIndent(Indent), BreakBeforeClosingBracket(false),
+        BreakBeforeClosingBrace(false), BreakBeforeClosingParen(false),
+        AvoidBinPacking(AvoidBinPacking), BreakBeforeParameter(false),
+        NoLineBreak(NoLineBreak), NoLineBreakInOperand(false),
+        LastOperatorWrapped(true), ContainsLineBreak(false),
+        ContainsUnwrappedBuilder(false), AlignColons(true),
+        ObjCSelectorNameFound(false), HasMultipleNestedBlocks(false),
+        NestedBlockInlined(false), IsInsideObjCArrayLiteral(false) {}
 
   /// \brief The token opening this parenthesis level, or nullptr if this level
   /// is opened by fake parenthesis.
@@ -265,6 +265,13 @@ struct ParenState {
   ///
   /// Used to align further variables if necessary.
   unsigned VariablePos = 0;
+
+  /// Whether a newline needs to be inserted before the block's closing
+  /// bracket.
+  ///
+  /// We only want to insert a newline before the closing bracket if there also
+  /// was a newline after the beginning left bracket.
+  bool BreakBeforeClosingBracket : 1;
 
   /// Whether a newline needs to be inserted before the block's closing
   /// brace.
@@ -347,6 +354,8 @@ struct ParenState {
       return NestedBlockIndent < Other.NestedBlockIndent;
     if (FirstLessLess != Other.FirstLessLess)
       return FirstLessLess < Other.FirstLessLess;
+    if (BreakBeforeClosingBracket != Other.BreakBeforeClosingBracket)
+      return BreakBeforeClosingBracket;
     if (BreakBeforeClosingBrace != Other.BreakBeforeClosingBrace)
       return BreakBeforeClosingBrace;
     if (BreakBeforeClosingParen != Other.BreakBeforeClosingParen)
