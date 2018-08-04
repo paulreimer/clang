@@ -270,6 +270,24 @@ the configuration (without a prefix: ``Auto``).
     int a;     // My comment a      vs.     int a; // My comment a
     int b = 2; // comment  b                int b = 2; // comment about b
 
+**AllowAllArgumentsOnNextLine** (``bool``)
+  If the function call site doesn't fit on a line,
+  allow putting all arguments to the function call onto
+  the next line even if ``BinPackArguments`` is ``false``.
+
+  .. code-block:: c++
+
+    true:
+    myFunction(
+        int a, int b, int c, int d, int e);
+
+    false:
+    myFunction(int a,
+               int b,
+               int c,
+               int d,
+               int e);
+
 **AllowAllParametersOfDeclarationOnNextLine** (``bool``)
   If the function declaration doesn't fit on a line,
   allow putting all parameters of a function declaration onto

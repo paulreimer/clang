@@ -153,6 +153,23 @@ struct FormatStyle {
   /// \endcode
   bool AlignTrailingComments;
 
+  /// If the function call site doesn't fit on a line,
+  /// allow putting all arguments to the function call onto
+  /// the next line even if ``BinPackArguments`` is ``false``.
+  /// \code
+  ///   true:
+  ///   myFunction(
+  ///       int a, int b, int c, int d, int e);
+  ///
+  ///   false:
+  ///   myFunction(int a,
+  ///              int b,
+  ///              int c,
+  ///              int d,
+  ///              int e);
+  /// \endcode
+  bool AllowAllArgumentsOnNextLine;
+
   /// If the function declaration doesn't fit on a line,
   /// allow putting all parameters of a function declaration onto
   /// the next line even if ``BinPackParameters`` is ``false``.
@@ -1708,6 +1725,8 @@ struct FormatStyle {
            AlignTrailingComments == R.AlignTrailingComments &&
            AllowAllParametersOfDeclarationOnNextLine ==
                R.AllowAllParametersOfDeclarationOnNextLine &&
+           AllowAllArgumentsOnNextLine ==
+               R.AllowAllArgumentsOnNextLine &&
            AllowShortBlocksOnASingleLine == R.AllowShortBlocksOnASingleLine &&
            AllowShortCaseLabelsOnASingleLine ==
                R.AllowShortCaseLabelsOnASingleLine &&

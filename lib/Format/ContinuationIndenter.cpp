@@ -890,11 +890,13 @@ unsigned ContinuationIndenter::addTokenOnNewLine(LineState &State,
 
   if (State.Stack.back().AvoidBinPacking) {
     // If we are breaking after '(', '{', '<', this is not bin packing
-    // unless AllowAllParametersOfDeclarationOnNextLine is false or this is a
-    // dict/object literal.
+    // unless AllowAllParametersOfDeclarationOnNextLine is false
+    // or AllowAllArgumentsOnNextLine is false or this is a dict/object literal.
     if (!Previous.isOneOf(tok::l_paren, tok::l_brace, TT_BinaryOperator) ||
         (!Style.AllowAllParametersOfDeclarationOnNextLine &&
          State.Line->MustBeDeclaration) ||
+        (!Style.AllowAllArgumentsOnNextLine &&
+         !State.Line->MustBeDeclaration) ||
         Previous.is(TT_DictLiteral))
       State.Stack.back().BreakBeforeParameter = true;
   }
