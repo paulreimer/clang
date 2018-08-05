@@ -324,6 +324,12 @@ bool ContinuationIndenter::canBreak(const LineState &State) {
   if (Previous.is(tok::l_square) && Previous.is(TT_ObjCMethodExpr))
     return false;
 
+  if (Style.BreakBeforeReturnTypeForModifiers &&
+      Previous.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
+      Current.is(tok::kw_auto)) {
+    return State.Stack.back().LastSpace;
+  }
+
   if (Style.DanglingBrace) {
     if (Current.is(tok::r_brace) && !State.Stack.back().BreakBeforeClosingBrace)
       return false;
