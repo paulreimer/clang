@@ -1098,15 +1098,15 @@ unsigned ContinuationIndenter::getNewLineColumn(const LineState &State) {
     return ContinuationIndent;
   if (Current.is(TT_ProtoExtensionLSquare))
     return State.Stack.back().Indent;
+  if (Style.BreakBeforeReturnTypeAfterModifiers &&
+      PreviousNonComment->isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
+      Current.is(tok::kw_auto))
+    return State.Stack.back().Indent;
   if (State.Stack.back().Indent == State.FirstIndent && PreviousNonComment &&
       PreviousNonComment->isNot(tok::r_brace))
     // Ensure that we fall back to the continuation indent width instead of
     // just flushing continuations left.
     return State.Stack.back().Indent + Style.ContinuationIndentWidth;
-  if (Style.BreakBeforeReturnTypeAfterModifiers &&
-      Previous.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
-      Current.is(tok::kw_auto))
-    return State.Stack.back().Indent;
   return State.Stack.back().Indent;
 }
 
