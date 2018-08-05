@@ -2953,8 +2953,7 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
     return true;
 
   if (Style.DanglingBrace && Right.is(tok::r_brace) &&
-      Right.BlockKind == BK_BracedInit && Right.MatchingParen &&
-      Right.MatchingParen->PackingKind == PPK_OnePerLine)
+      Right.BlockKind == BK_BracedInit && Right.MatchingParen)
     return true;
 
   if (Style.BreakBeforeReturnTypeForModifiers &&
@@ -3237,9 +3236,9 @@ bool TokenAnnotator::canBreakBefore(const AnnotatedLine &Line,
     return false;
 
   if (Style.BreakBeforeReturnTypeForModifiers &&
-     Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
-     Right.is(tok::kw_auto))
-   return true;
+      Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
+      Right.is(tok::kw_auto))
+    return true;
 
   if (Right.is(tok::greater)) {
     return Style.DanglingBracket;
