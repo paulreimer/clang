@@ -2946,6 +2946,16 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
   if (Left.is(TT_ObjCBlockLBrace) && !Style.AllowShortBlocksOnASingleLine)
     return true;
 
+  if (Style.BreakBeforeLambdaArguments && Right.is(tok::l_paren) &&
+      Left.is(tok::r_square) && Left.MatchingParen &&
+      Left.MatchingParen->is(TT_LambdaLSquare))
+    return true;
+
+  if (Style.BreakBeforeReturnTypeAfterModifiers &&
+      Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
+      Right.is(tok::kw_auto))
+    return true;
+
   if (Style.BreakBeforeTrailingReturnArrow &&
       Right.isOneOf(TT_TrailingReturnArrow, TT_LambdaArrow) &&
       (Style.DanglingParenthesis == false ||
@@ -3229,6 +3239,16 @@ bool TokenAnnotator::canBreakBefore(const AnnotatedLine &Line,
     return false;
   if (Right.is(TT_ImplicitStringLiteral))
     return false;
+
+  if (Style.BreakBeforeLambdaArguments && Right.is(tok::l_paren) &&
+      Left.is(tok::r_square) && Left.MatchingParen &&
+      Left.MatchingParen->is(TT_LambdaLSquare))
+    return true;
+
+  if (Style.BreakBeforeReturnTypeAfterModifiers &&
+      Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
+      Right.is(tok::kw_auto))
+    return true;
 
   if (Right.is(tok::greater)) {
     return Style.DanglingBracket;
