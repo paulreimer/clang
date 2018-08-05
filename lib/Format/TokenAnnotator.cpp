@@ -2953,7 +2953,13 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
     return true;
 
   if (Style.DanglingBrace && Right.is(tok::r_brace) &&
-      Right.BlockKind == BK_BracedInit && Right.MatchingParen)
+      Right.BlockKind == BK_BracedInit && Right.MatchingParen &&
+      Right.MatchingParen->PackingKind == PPK_OnePerLine)
+    return true;
+
+  if (Style.BreakBeforeReturnTypeForModifiers &&
+      Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
+      Right.is(tok::kw_auto))
     return true;
 
   if ((Style.Language == FormatStyle::LK_Java ||
