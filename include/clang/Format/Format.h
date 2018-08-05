@@ -839,6 +839,17 @@ struct FormatStyle {
   /// \endcode
   BraceWrappingFlags BraceWrapping;
 
+  /// If ``true``, a break will be placed between modifiers and the return type.
+  /// \code
+  ///    true:
+  ///    inline
+  ///    void main();
+  ///
+  ///    false:
+  ///    inline void main();
+  /// \endcode
+  bool BreakBeforeReturnTypeForModifiers;
+
   /// If ``true``, ternary operators will be placed after line breaks.
   /// \code
   ///    true:
@@ -1778,6 +1789,7 @@ struct FormatStyle {
            BinPackParameters == R.BinPackParameters &&
            BreakBeforeBinaryOperators == R.BreakBeforeBinaryOperators &&
            BreakBeforeBraces == R.BreakBeforeBraces &&
+           BreakBeforeReturnTypeForModifiers == R.BreakBeforeReturnTypeForModifiers &&
            BreakBeforeTernaryOperators == R.BreakBeforeTernaryOperators &&
            BreakBeforeTrailingReturnArrow == R.BreakBeforeTrailingReturnArrow &&
            BreakConstructorInitializers == R.BreakConstructorInitializers &&

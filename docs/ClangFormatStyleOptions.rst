@@ -1011,6 +1011,17 @@ the configuration (without a prefix: ``Auto``).
     Configure each individual brace in `BraceWrapping`.
 
 
+**BreakBeforeReturnTypeForModifiers** (``bool``)
+  If ``true``, a break will be placed between modifiers and the return type.
+
+  .. code-block:: c++
+
+     true:
+     inline
+     void main();
+
+     false:
+     inline void main();
 
 **BreakBeforeTernaryOperators** (``bool``)
   If ``true``, ternary operators will be placed after line breaks.

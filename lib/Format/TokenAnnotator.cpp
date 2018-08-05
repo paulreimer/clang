@@ -2946,6 +2946,11 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
   if (Left.is(TT_ObjCBlockLBrace) && !Style.AllowShortBlocksOnASingleLine)
     return true;
 
+  if (Style.BreakBeforeReturnTypeForModifiers &&
+      Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
+      Right.is(tok::kw_auto)
+    return true;
+
   if (Style.BreakBeforeTrailingReturnArrow &&
       Right.isOneOf(TT_TrailingReturnArrow, TT_LambdaArrow) &&
       (Style.DanglingParenthesis == false ||
