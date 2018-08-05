@@ -1100,7 +1100,7 @@ unsigned ContinuationIndenter::getNewLineColumn(const LineState &State) {
     return State.Stack.back().Indent;
   if (Style.BreakBeforeReturnTypeAfterModifiers &&
       Previous.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
-      Current.is(tok::kw_auto) && !State.Stack.empty())
+      Current.is(tok::kw_auto))
     return State.FirstIndent;
   if (State.Stack.back().Indent == State.FirstIndent && PreviousNonComment &&
       PreviousNonComment->isNot(tok::r_brace))
