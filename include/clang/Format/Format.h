@@ -848,7 +848,7 @@ struct FormatStyle {
   ///    false:
   ///    inline void main();
   /// \endcode
-  bool BreakBeforeReturnTypeForModifiers;
+  bool BreakBeforeReturnTypeAfterModifiers;
 
   /// If ``true``, ternary operators will be placed after line breaks.
   /// \code
@@ -1789,7 +1789,7 @@ struct FormatStyle {
            BinPackParameters == R.BinPackParameters &&
            BreakBeforeBinaryOperators == R.BreakBeforeBinaryOperators &&
            BreakBeforeBraces == R.BreakBeforeBraces &&
-           BreakBeforeReturnTypeForModifiers == R.BreakBeforeReturnTypeForModifiers &&
+           BreakBeforeReturnTypeAfterModifiers == R.BreakBeforeReturnTypeAfterModifiers &&
            BreakBeforeTernaryOperators == R.BreakBeforeTernaryOperators &&
            BreakBeforeTrailingReturnArrow == R.BreakBeforeTrailingReturnArrow &&
            BreakConstructorInitializers == R.BreakConstructorInitializers &&

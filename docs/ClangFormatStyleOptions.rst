@@ -1011,7 +1011,7 @@ the configuration (without a prefix: ``Auto``).
     Configure each individual brace in `BraceWrapping`.
 
 
-**BreakBeforeReturnTypeForModifiers** (``bool``)
+**BreakBeforeReturnTypeAfterModifiers** (``bool``)
   If ``true``, a break will be placed between modifiers and the return type.
 
   .. code-block:: c++

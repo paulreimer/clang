@@ -2956,7 +2956,7 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
       Right.BlockKind == BK_BracedInit && Right.MatchingParen)
     return true;
 
-  if (Style.BreakBeforeReturnTypeForModifiers &&
+  if (Style.BreakBeforeReturnTypeAfterModifiers &&
       Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
       Right.is(tok::kw_auto))
     return true;
@@ -3235,7 +3235,7 @@ bool TokenAnnotator::canBreakBefore(const AnnotatedLine &Line,
   if (Right.is(TT_ImplicitStringLiteral))
     return false;
 
-  if (Style.BreakBeforeReturnTypeForModifiers &&
+  if (Style.BreakBeforeReturnTypeAfterModifiers &&
       Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
       Right.is(tok::kw_auto))
     return true;
