@@ -3248,8 +3248,7 @@ bool TokenAnnotator::canBreakBefore(const AnnotatedLine &Line,
   // the l_brace, which is tracked by BreakBeforeClosingBrace.
   if (Right.is(tok::r_brace))
     return Right.MatchingParen && Right.MatchingParen->BlockKind == BK_Block ||
-      Style.DanglingBrace &&
-      Right.MatchingParen->BlockKind == BK_BracedInit;
+      Style.DanglingBrace;
 
   // Allow breaking after a trailing annotation, e.g. after a method
   // declaration.
