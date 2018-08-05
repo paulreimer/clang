@@ -968,12 +968,12 @@ unsigned ContinuationIndenter::getNewLineColumn(const LineState &State) {
   if (Current.is(tok::r_paren) && State.Stack.size() > 1 &&
       (!Current.Next || Current.Next->isOneOf(tok::semi, tok::l_brace)))
     return State.Stack[State.Stack.size() - 2].LastSpace;
-  if (Style.BreakBeforeReturnTypeForModifiers &&
-      Previous.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
-      Current.is(tok::kw_auto) &&
-      State.Stack.size() > 1) {
-    return State.Stack[State.Stack.size() - 2].LastSpace;
-  }
+  //if (Style.BreakBeforeReturnTypeForModifiers &&
+  //    Previous.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
+  //    Current.is(tok::kw_auto) &&
+  //    State.Stack.size() > 1) {
+  //  return State.Stack[State.Stack.size() - 2].LastSpace;
+  //}
   if (Style.DanglingBracket && Current.is(tok::greater) &&
       State.Stack.size() > 1) {
     return State.Stack[State.Stack.size() - 2].LastSpace;
