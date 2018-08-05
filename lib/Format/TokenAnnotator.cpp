@@ -2948,7 +2948,7 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
 
   if (Style.BreakBeforeReturnTypeForModifiers &&
       Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
-      Right.is(tok::kw_auto)
+      Right.is(tok::kw_auto))
     return true;
 
   if (Style.BreakBeforeTrailingReturnArrow &&
