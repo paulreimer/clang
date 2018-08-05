@@ -2952,10 +2952,14 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
        Left.MatchingParen && Left.MatchingParen->PackingKind != PPK_OnePerLine))
     return true;
 
-  if (Style.DanglingBrace &&
-      Right.is(tok::r_brace) &&
-      //Left.MatchingParen && Left.MatchingParen->BlockKind != BK_BracedInit &&
-      Left.MatchingParen && Left.MatchingParen->PackingKind == PPK_OnePerLine)
+  if (Style.DanglingBrace && Right.is(tok::r_brace)) //&&
+    // Left.MatchingParen && Left.MatchingParen->BlockKind != BK_BracedInit &&
+    // Left.MatchingParen && Left.MatchingParen->PackingKind == PPK_OnePerLine)
+    return true;
+
+  if (Style.BreakBeforeReturnTypeForModifiers &&
+      Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
+      Right.is(tok::kw_auto))
     return true;
 
   if ((Style.Language == FormatStyle::LK_Java ||
@@ -3252,8 +3256,7 @@ bool TokenAnnotator::canBreakBefore(const AnnotatedLine &Line,
   // We only break before r_brace if there was a corresponding break before
   // the l_brace, which is tracked by BreakBeforeClosingBrace.
   if (Right.is(tok::r_brace))
-    return Right.MatchingParen && Right.MatchingParen->BlockKind == BK_Block ||
-      Style.DanglingBrace;
+    return Right.MatchingParen && Right.MatchingParen->BlockKind == BK_Block;
 
   // Allow breaking after a trailing annotation, e.g. after a method
   // declaration.
