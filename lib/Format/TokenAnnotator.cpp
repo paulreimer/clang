@@ -2952,8 +2952,8 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
        Left.MatchingParen && Left.MatchingParen->PackingKind != PPK_OnePerLine))
     return true;
 
-  if (Style.DanglingBrace && Right.is(tok::r_brace)) //&&
-    // Left.MatchingParen && Left.MatchingParen->BlockKind != BK_BracedInit &&
+  if (Style.DanglingBrace && Right.is(tok::r_brace) && Left.MatchingParen &&
+      Left.MatchingParen->BlockKind == BK_BracedInit) //&&
     // Left.MatchingParen && Left.MatchingParen->PackingKind == PPK_OnePerLine)
     return true;
 
@@ -3236,10 +3236,10 @@ bool TokenAnnotator::canBreakBefore(const AnnotatedLine &Line,
   if (Right.is(TT_ImplicitStringLiteral))
     return false;
 
-  if (Style.BreakBeforeReturnTypeForModifiers &&
-      Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
-      Right.is(tok::kw_auto))
-    return true;
+  // if (Style.BreakBeforeReturnTypeForModifiers &&
+  //    Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
+  //    Right.is(tok::kw_auto))
+  //  return true;
 
   if (Right.is(tok::greater)) {
     return Style.DanglingBracket;
