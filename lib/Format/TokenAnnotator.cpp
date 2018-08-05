@@ -2953,7 +2953,7 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
     return true;
 
   if (Style.DanglingBrace && Right.is(tok::r_brace) &&
-      Left.BlockKind == BK_BracedInit) //&&
+      Right.BlockKind == BK_BracedInit) //&&
     // Left.MatchingParen && Left.MatchingParen->PackingKind == PPK_OnePerLine)
     return true;
 
