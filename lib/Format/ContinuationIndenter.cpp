@@ -325,7 +325,7 @@ bool ContinuationIndenter::canBreak(const LineState &State) {
     return false;
 
   if (Style.BreakBeforeLambdaArguments) {
-    if (Current.is(tok::l_paren) && Previous && Previous.is(tok::r_square) &&
+    if (Current.is(tok::l_paren) && Previous.is(tok::r_square) &&
         Previous.MatchingParen &&
         Previous.MatchingParen->is(TT_LambdaLSquare)) {
       return true;
@@ -983,7 +983,7 @@ unsigned ContinuationIndenter::getNewLineColumn(const LineState &State) {
       (!Current.Next || Current.Next->isOneOf(tok::semi, tok::l_brace)))
     return State.Stack[State.Stack.size() - 2].LastSpace;
   if (Style.BreakBeforeLambdaArguments) {
-    if (Current.is(tok::l_paren) && Previous && Previous.is(tok::r_square) &&
+    if (Current.is(tok::l_paren) && Previous.is(tok::r_square) &&
         Previous.MatchingParen &&
         Previous.MatchingParen->is(TT_LambdaLSquare)) {
       return State.Stack.back().LastSpace;
