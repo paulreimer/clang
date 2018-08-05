@@ -284,9 +284,9 @@ bool ContinuationIndenter::canBreak(const LineState &State) {
     return false;
   // The opening "{" of a braced list has to be on the same line as the first
   // element if it is nested in another braced init list or function call.
-  if (!Style.DanglingBrace && !Current.MustBreakBefore &&
-      Previous.is(tok::l_brace) && Previous.isNot(TT_DictLiteral) &&
-      Previous.BlockKind == BK_BracedInit && Previous.Previous &&
+  if (!Current.MustBreakBefore && Previous.is(tok::l_brace) &&
+      Previous.isNot(TT_DictLiteral) && Previous.BlockKind == BK_BracedInit &&
+      Previous.Previous &&
       Previous.Previous->isOneOf(tok::l_brace, tok::l_paren, tok::comma))
     return false;
   // This prevents breaks like:
