@@ -991,7 +991,7 @@ unsigned ContinuationIndenter::getNewLineColumn(const LineState &State) {
   }
   if (Style.BreakBeforeReturnTypeAfterModifiers &&
       Previous.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
-      Current.is(tok::kw_auto)) {
+      Current.is(tok::kw_auto) && !State.Stack.empty()) {
     return State.Stack.back().LastSpace;
   }
   if (Style.DanglingBracket && Current.is(tok::greater) &&
