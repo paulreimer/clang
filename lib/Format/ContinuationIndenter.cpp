@@ -327,7 +327,7 @@ bool ContinuationIndenter::canBreak(const LineState &State) {
   if (Style.BreakBeforeReturnTypeAfterModifiers &&
       Previous.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
       Current.is(tok::kw_auto)) {
-    return State.Stack.back().LastSpace;
+    return true;
   }
 
   if (Style.DanglingBrace) {

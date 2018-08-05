@@ -3230,11 +3230,6 @@ bool TokenAnnotator::canBreakBefore(const AnnotatedLine &Line,
   if (Right.is(TT_ImplicitStringLiteral))
     return false;
 
-  if (Style.BreakBeforeReturnTypeAfterModifiers &&
-      Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
-      Right.is(tok::kw_auto))
-    return true;
-
   if (Right.is(tok::greater)) {
     return Style.DanglingBracket;
   }

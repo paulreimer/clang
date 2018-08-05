@@ -1789,7 +1789,8 @@ struct FormatStyle {
            BinPackParameters == R.BinPackParameters &&
            BreakBeforeBinaryOperators == R.BreakBeforeBinaryOperators &&
            BreakBeforeBraces == R.BreakBeforeBraces &&
-           BreakBeforeReturnTypeAfterModifiers == R.BreakBeforeReturnTypeAfterModifiers &&
+           BreakBeforeReturnTypeAfterModifiers ==
+               R.BreakBeforeReturnTypeAfterModifiers &&
            BreakBeforeTernaryOperators == R.BreakBeforeTernaryOperators &&
            BreakBeforeTrailingReturnArrow == R.BreakBeforeTrailingReturnArrow &&
            BreakConstructorInitializers == R.BreakConstructorInitializers &&
