@@ -2946,16 +2946,16 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
   if (Left.is(TT_ObjCBlockLBrace) && !Style.AllowShortBlocksOnASingleLine)
     return true;
 
-  if (Style.BreakBeforeReturnTypeForModifiers &&
-      Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
-      Right.is(tok::kw_auto))
-    return true;
-
   if (Style.BreakBeforeTrailingReturnArrow &&
       Right.isOneOf(TT_TrailingReturnArrow, TT_LambdaArrow) &&
       (Style.DanglingParenthesis == false ||
-        Left.MatchingParen &&
-        Left.MatchingParen->PackingKind != PPK_OnePerLine))
+       Left.MatchingParen && Left.MatchingParen->PackingKind != PPK_OnePerLine))
+    return true;
+
+  if (Style.DanglingBrace &&
+      Right.is(tok::r_brace) &&
+      //Left.MatchingParen && Left.MatchingParen->BlockKind != BK_BracedInit &&
+      Left.MatchingParen && Left.MatchingParen->PackingKind == PPK_OnePerLine)
     return true;
 
   if ((Style.Language == FormatStyle::LK_Java ||
@@ -3231,6 +3231,11 @@ bool TokenAnnotator::canBreakBefore(const AnnotatedLine &Line,
     return false;
   if (Right.is(TT_ImplicitStringLiteral))
     return false;
+
+  if (Style.BreakBeforeReturnTypeForModifiers &&
+      Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
+      Right.is(tok::kw_auto))
+    return true;
 
   if (Right.is(tok::greater)) {
     return Style.DanglingBracket;
