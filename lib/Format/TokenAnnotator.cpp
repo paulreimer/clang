@@ -2948,7 +2948,7 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
 
   if (Style.BreakBeforeTrailingReturnArrow &&
       Right.isOneOf(TT_TrailingReturnArrow, TT_LambdaArrow) &&
-      Left.Children.empty())
+      Left.NestingLevel == 1)
     return true;
 
   if ((Style.Language == FormatStyle::LK_Java ||
