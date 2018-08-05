@@ -284,10 +284,9 @@ bool ContinuationIndenter::canBreak(const LineState &State) {
     return false;
   // The opening "{" of a braced list has to be on the same line as the first
   // element if it is nested in another braced init list or function call.
-  if (!Style.DanglingBrace &&
-      !Current.MustBreakBefore && Previous.is(tok::l_brace) &&
-      Previous.isNot(TT_DictLiteral) && Previous.BlockKind == BK_BracedInit &&
-      Previous.Previous &&
+  if (!Style.DanglingBrace && !Current.MustBreakBefore &&
+      Previous.is(tok::l_brace) && Previous.isNot(TT_DictLiteral) &&
+      Previous.BlockKind == BK_BracedInit && Previous.Previous &&
       Previous.Previous->isOneOf(tok::l_brace, tok::l_paren, tok::comma))
     return false;
   // This prevents breaks like:
@@ -325,6 +324,11 @@ bool ContinuationIndenter::canBreak(const LineState &State) {
   if (Previous.is(tok::l_square) && Previous.is(TT_ObjCMethodExpr))
     return false;
 
+  if (Style.DanglingBrace) {
+    if (Current.is(tok::r_brace) && !State.Stack.back().BreakBeforeClosingBrace)
+      return false;
+  }
+
   if (Style.DanglingBracket) {
     if (Current.is(tok::greater) &&
         !State.Stack.back().BreakBeforeClosingBracket)
@@ -347,9 +351,9 @@ bool ContinuationIndenter::mustBreak(const LineState &State) {
   if (State.Stack.back().BreakBeforeClosingBrace &&
       Current.closesBlockOrBlockTypeList(Style))
     return true;
-  if(State.Stack.back().BreakBeforeClosingBracket && Current.is(tok::greater))
+  if (State.Stack.back().BreakBeforeClosingBracket && Current.is(tok::greater))
     return true;
-  if(State.Stack.back().BreakBeforeClosingParen && Current.is(tok::r_paren))
+  if (State.Stack.back().BreakBeforeClosingParen && Current.is(tok::r_paren))
     return true;
   if (Previous.is(tok::semi) && State.LineContainsContinuedForLoopSection)
     return true;
@@ -964,10 +968,12 @@ unsigned ContinuationIndenter::getNewLineColumn(const LineState &State) {
   if (Current.is(tok::r_paren) && State.Stack.size() > 1 &&
       (!Current.Next || Current.Next->isOneOf(tok::semi, tok::l_brace)))
     return State.Stack[State.Stack.size() - 2].LastSpace;
-  if (Style.DanglingBracket && Current.is(tok::greater) && State.Stack.size() > 1) {
+  if (Style.DanglingBracket && Current.is(tok::greater) &&
+      State.Stack.size() > 1) {
     return State.Stack[State.Stack.size() - 2].LastSpace;
   }
-  if (Style.DanglingParenthesis && Current.is(tok::r_paren) && State.Stack.size() > 1) {
+  if (Style.DanglingParenthesis && Current.is(tok::r_paren) &&
+      State.Stack.size() > 1) {
     return State.Stack[State.Stack.size() - 2].LastSpace;
   }
   if (Style.BreakBeforeTrailingReturnArrow &&
