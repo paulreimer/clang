@@ -2948,7 +2948,9 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
 
   if (Style.BreakBeforeTrailingReturnArrow &&
       Right.isOneOf(TT_TrailingReturnArrow, TT_LambdaArrow) &&
-      !Left.closesBlockOrBlockTypeList(Style))
+      Left.is(tok::r_paren) &&
+      Left.MatchingParen &&
+      Left.MatchingParen->PackingKind != PPK_OnePerLine)
     return true;
 
   if ((Style.Language == FormatStyle::LK_Java ||
