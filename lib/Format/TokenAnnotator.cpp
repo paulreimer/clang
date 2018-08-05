@@ -2956,11 +2956,6 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
       Right.BlockKind == BK_BracedInit && Right.MatchingParen)
     return true;
 
-  if (Style.BreakBeforeReturnTypeAfterModifiers &&
-      Left.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
-      Right.is(tok::kw_auto))
-    return true;
-
   if ((Style.Language == FormatStyle::LK_Java ||
        Style.Language == FormatStyle::LK_JavaScript) &&
       Left.is(TT_LeadingJavaAnnotation) &&
