@@ -2964,8 +2964,7 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
 
   if (Style.DanglingBrace && Right.is(tok::r_brace) &&
       Right.BlockKind == BK_BracedInit && Right.MatchingParen &&
-      (Right.MatchingParen->PackingKind == PPK_OnePerLine ||
-       Right.MatchingParen->PackingKind == PPK_BinPacked))
+      Right.HasUnescapedNewline)
     return true;
 
   if ((Style.Language == FormatStyle::LK_Java ||
