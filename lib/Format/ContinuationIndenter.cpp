@@ -524,7 +524,7 @@ bool ContinuationIndenter::mustBreak(const LineState &State) {
 
   if (Style.DanglingBrace)
     return (Current.is(tok::r_brace) &&
-            !State.Stack.back().BreakBeforeClosingBrace);
+            State.Stack.back().BreakBeforeClosingBrace);
 
   if (State.NoContinuation)
     return true;
