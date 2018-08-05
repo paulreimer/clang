@@ -924,9 +924,7 @@ unsigned ContinuationIndenter::addTokenOnNewLine(LineState &State,
     if (!Previous.isOneOf(tok::l_paren, tok::l_brace, TT_BinaryOperator) ||
         (!Style.AllowAllParametersOfDeclarationOnNextLine &&
          State.Line->MustBeDeclaration) ||
-        (!Style.AllowAllArgumentsOnNextLine &&
-         !State.Line->MustBeDeclaration) ||
-        Previous.is(TT_DictLiteral))
+        (!Style.AllowAllArgumentsOnNextLine) || Previous.is(TT_DictLiteral))
       State.Stack.back().BreakBeforeParameter = true;
   }
 
