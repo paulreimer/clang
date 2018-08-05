@@ -10617,6 +10617,7 @@ TEST_F(FormatTest, ParsesConfigurationBools) {
   CHECK_PARSE_BOOL(BreakStringLiterals);
   CHECK_PARSE_BOOL(CompactNamespaces);
   CHECK_PARSE_BOOL(ConstructorInitializerAllOnOneLineOrOnePerLine);
+  CHECK_PARSE_BOOL(DanglingBrace);
   CHECK_PARSE_BOOL(DanglingBracket);
   CHECK_PARSE_BOOL(DanglingParenthesis);
   CHECK_PARSE_BOOL(DerivePointerAlignment);
