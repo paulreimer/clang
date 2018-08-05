@@ -2952,8 +2952,8 @@ bool TokenAnnotator::mustBreakBefore(const AnnotatedLine &Line,
        Left.MatchingParen && Left.MatchingParen->PackingKind != PPK_OnePerLine))
     return true;
 
-  if (Style.DanglingBrace && Right.is(tok::r_brace) && Left.MatchingParen &&
-      Left.MatchingParen->BlockKind == BK_BracedInit) //&&
+  if (Style.DanglingBrace && Right.is(tok::r_brace) &&
+      Left.BlockKind == BK_BracedInit) //&&
     // Left.MatchingParen && Left.MatchingParen->PackingKind == PPK_OnePerLine)
     return true;
 
