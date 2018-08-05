@@ -338,11 +338,6 @@ bool ContinuationIndenter::canBreak(const LineState &State) {
     return true;
   }
 
-  if (Style.DanglingBrace) {
-    if (Current.is(tok::r_brace) && !State.Stack.back().BreakBeforeClosingBrace)
-      return false;
-  }
-
   if (Style.DanglingBracket) {
     if (Current.is(tok::greater) &&
         !State.Stack.back().BreakBeforeClosingBracket)
@@ -526,6 +521,10 @@ bool ContinuationIndenter::mustBreak(const LineState &State) {
 
   if (Previous.is(TT_BlockComment) && Previous.IsMultiline)
     return true;
+
+  if (Style.DanglingBrace)
+    return (Current.is(tok::r_brace) &&
+            !State.Stack.back().BreakBeforeClosingBrace);
 
   if (State.NoContinuation)
     return true;
