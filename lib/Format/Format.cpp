@@ -401,6 +401,7 @@ template <> struct MappingTraits<FormatStyle> {
     IO.mapOptional("CompactNamespaces", Style.CompactNamespaces);
     IO.mapOptional("ConstructorInitializerAllOnOneLineOrOnePerLine",
                    Style.ConstructorInitializerAllOnOneLineOrOnePerLine);
+    IO.mapOptional("DanglingBrace", Style.DanglingBrace);
     IO.mapOptional("DanglingBracket", Style.DanglingBracket);
     IO.mapOptional("DanglingParenthesis", Style.DanglingParenthesis);
     IO.mapOptional("ConstructorInitializerIndentWidth",
@@ -662,6 +663,7 @@ FormatStyle getLLVMStyle() {
   LLVMStyle.CommentPragmas = "^ IWYU pragma:";
   LLVMStyle.CompactNamespaces = false;
   LLVMStyle.ConstructorInitializerAllOnOneLineOrOnePerLine = false;
+  LLVMStyle.DanglingBrace = false;
   LLVMStyle.DanglingBracket = false;
   LLVMStyle.DanglingParenthesis = false;
   LLVMStyle.ConstructorInitializerIndentWidth = 4;
@@ -748,6 +750,7 @@ FormatStyle getGoogleStyle(FormatStyle::LanguageKind Language) {
   GoogleStyle.AlwaysBreakTemplateDeclarations = FormatStyle::BTDS_Yes;
   GoogleStyle.BreakBeforeTrailingReturnArrow = false;
   GoogleStyle.ConstructorInitializerAllOnOneLineOrOnePerLine = true;
+  GoogleStyle.DanglingBrace = false;
   GoogleStyle.DanglingBracket = false;
   GoogleStyle.DanglingParenthesis = false;
   GoogleStyle.DerivePointerAlignment = true;

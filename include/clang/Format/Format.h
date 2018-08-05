@@ -983,6 +983,22 @@ struct FormatStyle {
   /// \endcode
   bool ConstructorInitializerAllOnOneLineOrOnePerLine;
 
+  /// \brief If there is a break after the opening brace, also break
+  /// before the closing brace
+  /// \code
+  ///   true:
+  ///   SomeClass{
+  ///     SomeReallyReallyLongTemplateArg1,
+  ///     SomeReallyReallyLongTemplateArg2
+  ///   }
+  ///
+  ///   false:
+  ///   SomeClass{
+  ///     SomeFunctionWithLongTemplateArg1,
+  ///     SomeFunctionWithLongTemplateArg2}
+  /// \endcode
+  bool DanglingBrace;
+
   /// \brief If there is a break after the opening bracket, also break
   /// before the closing bracket
   /// \code
@@ -1776,6 +1792,7 @@ struct FormatStyle {
                R.ConstructorInitializerIndentWidth &&
            ContinuationIndentWidth == R.ContinuationIndentWidth &&
            Cpp11BracedListStyle == R.Cpp11BracedListStyle &&
+           DanglingBrace == R.DanglingBrace &&
            DanglingBracket == R.DanglingBracket &&
            DanglingParenthesis == R.DanglingParenthesis &&
            DerivePointerAlignment == R.DerivePointerAlignment &&

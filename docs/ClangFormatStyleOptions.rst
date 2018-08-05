@@ -1168,6 +1168,22 @@ the configuration (without a prefix: ``Auto``).
         : aaaaaaaaaaaaa(aaaaaaaaaaaaaa), aaaaaaaaaaaaa(aaaaaaaaaaaaaa),
           aaaaaaaaaaaaa(aaaaaaaaaaaaaa) {}
 
+**DanglingBrace** (``bool``)
+  If there is a break after the opening brace, also break before the closing brace
+
+  .. code-block:: c++
+
+    true:
+    SomeClass{
+      SomeReallyReallyLongTemplateArg1,
+      SomeReallyReallyLongTemplateArg2
+    }
+
+    false:
+    SomeClass{
+      SomeFunctionWithLongTemplateArg1,
+      SomeFunctionWithLongTemplateArg2}
+
 **DanglingBracket** (``bool``)
   If there is a break after the opening bracket, also break before the closing bracket
 
