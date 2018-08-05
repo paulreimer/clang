@@ -10613,6 +10613,7 @@ TEST_F(FormatTest, ParsesConfigurationBools) {
   CHECK_PARSE_BOOL(BinPackParameters);
   CHECK_PARSE_BOOL(BreakAfterJavaFieldAnnotations);
   CHECK_PARSE_BOOL(BreakBeforeTrailingReturnArrow);
+  CHECK_PARSE_BOOL(BreakBeforeLambdaArguments);
   CHECK_PARSE_BOOL(BreakBeforeReturnTypeAfterModifiers);
   CHECK_PARSE_BOOL(BreakBeforeTernaryOperators);
   CHECK_PARSE_BOOL(BreakStringLiterals);

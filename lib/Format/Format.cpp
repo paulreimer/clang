@@ -375,6 +375,8 @@ template <> struct MappingTraits<FormatStyle> {
         Style.BreakInheritanceList == FormatStyle::BILS_BeforeColon)
       Style.BreakInheritanceList = FormatStyle::BILS_BeforeComma;
 
+    IO.mapOptional("BreakBeforeLambdaArguments",
+                   Style.BreakBeforeLambdaArguments);
     IO.mapOptional("BreakBeforeReturnTypeAfterModifiers",
                    Style.BreakBeforeReturnTypeAfterModifiers);
     IO.mapOptional("BreakBeforeTernaryOperators",
@@ -651,6 +653,7 @@ FormatStyle getLLVMStyle() {
   LLVMStyle.BinPackArguments = true;
   LLVMStyle.BinPackParameters = true;
   LLVMStyle.BreakBeforeBinaryOperators = FormatStyle::BOS_None;
+  LLVMStyle.BreakBeforeLambdaArguments = false;
   LLVMStyle.BreakBeforeReturnTypeAfterModifiers = false;
   LLVMStyle.BreakBeforeTernaryOperators = true;
   LLVMStyle.BreakBeforeTrailingReturnArrow = false;
@@ -752,6 +755,7 @@ FormatStyle getGoogleStyle(FormatStyle::LanguageKind Language) {
   GoogleStyle.AlwaysBreakBeforeMultilineStrings = true;
   GoogleStyle.AlwaysBreakTemplateDeclarations = FormatStyle::BTDS_Yes;
   GoogleStyle.BreakBeforeTrailingReturnArrow = false;
+  GoogleStyle.BreakBeforeLambdaArguments = false;
   GoogleStyle.BreakBeforeReturnTypeAfterModifiers = false;
   GoogleStyle.ConstructorInitializerAllOnOneLineOrOnePerLine = true;
   GoogleStyle.DanglingBrace = false;

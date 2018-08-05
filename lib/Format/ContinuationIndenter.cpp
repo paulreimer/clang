@@ -324,6 +324,14 @@ bool ContinuationIndenter::canBreak(const LineState &State) {
   if (Previous.is(tok::l_square) && Previous.is(TT_ObjCMethodExpr))
     return false;
 
+  if (Style.BreakBeforeLambdaArguments) {
+    if (Current.is(tok::l_paren) && Previous && Previous.is(tok::r_square) &&
+        Previous.MatchingParen &&
+        Previous.MatchingParen->is(TT_LambdaLSquare)) {
+      return true;
+    }
+  }
+
   if (Style.BreakBeforeReturnTypeAfterModifiers &&
       Previous.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
       Current.is(tok::kw_auto)) {
@@ -974,6 +982,13 @@ unsigned ContinuationIndenter::getNewLineColumn(const LineState &State) {
   if (Current.is(tok::r_paren) && State.Stack.size() > 1 &&
       (!Current.Next || Current.Next->isOneOf(tok::semi, tok::l_brace)))
     return State.Stack[State.Stack.size() - 2].LastSpace;
+  if (Style.BreakBeforeLambdaArguments) {
+    if (Current.is(tok::l_paren) && Previous && Previous.is(tok::r_square) &&
+        Previous.MatchingParen &&
+        Previous.MatchingParen->is(TT_LambdaLSquare)) {
+      return State.Stack.back().LastSpace;
+    }
+  }
   if (Style.BreakBeforeReturnTypeAfterModifiers &&
       Previous.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
       Current.is(tok::kw_auto)) {

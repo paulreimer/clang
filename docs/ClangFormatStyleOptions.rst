@@ -1010,6 +1010,19 @@ the configuration (without a prefix: ``Auto``).
   * ``BS_Custom`` (in configuration: ``Custom``)
     Configure each individual brace in `BraceWrapping`.
 
+**BreakBeforeLambdaArguments** (``bool``)
+  If ``true``, a break will be placed before lambda argument list.
+
+  .. code-block:: c++
+
+     true:
+     [=]
+     (Arg arg1) {
+     }
+
+     false:
+     [=](Arg arg1) {
+     }
 
 **BreakBeforeReturnTypeAfterModifiers** (``bool``)
   If ``true``, a break will be placed between modifiers and the return type.

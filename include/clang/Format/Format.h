@@ -839,6 +839,19 @@ struct FormatStyle {
   /// \endcode
   BraceWrappingFlags BraceWrapping;
 
+  /// If ``true``, a break will be placed before lambda argument list
+  /// \code
+  ///    true:
+  ///    [=]
+  ///    (Arg arg1) {
+  ///    }
+  ///
+  ///    false:
+  ///    [=](Arg arg1) {
+  ///    }
+  /// \endcode
+  bool BreakBeforeLambdaArguments;
+
   /// If ``true``, a break will be placed between modifiers and the return type.
   /// \code
   ///    true:
@@ -1789,6 +1802,7 @@ struct FormatStyle {
            BinPackParameters == R.BinPackParameters &&
            BreakBeforeBinaryOperators == R.BreakBeforeBinaryOperators &&
            BreakBeforeBraces == R.BreakBeforeBraces &&
+           BreakBeforeLambdaArguments == R.BreakBeforeLambdaArguments &&
            BreakBeforeReturnTypeAfterModifiers ==
                R.BreakBeforeReturnTypeAfterModifiers &&
            BreakBeforeTernaryOperators == R.BreakBeforeTernaryOperators &&
