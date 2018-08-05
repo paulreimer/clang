@@ -992,7 +992,7 @@ unsigned ContinuationIndenter::getNewLineColumn(const LineState &State) {
   if (Style.BreakBeforeReturnTypeAfterModifiers &&
       Previous.isOneOf(tok::kw_inline, tok::kw_static, tok::kw_volatile) &&
       Current.is(tok::kw_auto) && !State.Stack.empty()) {
-    // return State.Stack.back().Indent;
+    return std::max(State.Stack.back().LastSpace, State.Stack.back().Indent);
   }
   if (Style.DanglingBracket && Current.is(tok::greater) &&
       State.Stack.size() > 1) {
